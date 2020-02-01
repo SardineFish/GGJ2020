@@ -43,7 +43,12 @@ public class GameSystem : MonoBehaviour
     }
     IEnumerator DoRepare()
     {
-        var pieces = GameObject.FindGameObjectsWithTag("Pieces").Select(obj => obj.GetComponent<PieceSet>());
+        var pieces = GameObject.FindGameObjectsWithTag("Pieces").Select(obj => obj.GetComponent<PieceSet>()).Where(p =>
+        {
+            p.Pieces = p.Pieces.Where(t => t).ToList();
+            return p.Pieces.Count > 0;
+        });
+
         pieces.ForEach(p => p.Pieces.ForEach(t => t.StartBrownianMotion()));
         foreach(var _ in Utility.Timer(.2f))
         {

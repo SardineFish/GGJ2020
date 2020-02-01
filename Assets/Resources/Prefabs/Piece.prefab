@@ -98,6 +98,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BrownianMotionStrength: 10
   BrownianMotionSpeed: 1000
+  RepairTime: 1
+  TargetPosition: {x: 0, y: 0, z: 0}
 --- !u!135 &3698754279548877904
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -119,7 +121,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1088031583937141543}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.0001
   m_Drag: 0.2
   m_AngularDrag: 0.05
   m_UseGravity: 1

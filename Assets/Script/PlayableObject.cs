@@ -9,7 +9,6 @@ using UnityEngine;
 [RequireComponent(typeof(Pick))]
 public class PlayableObject: RepairableObject
 {
-    public List<BreakablePart> BreakableObjects = new List<BreakablePart>();
     public float ShakeStrength = 1;
     public float ShakeSpeed = 1;
     public float ShakeTime = 1;
@@ -37,22 +36,23 @@ public class PlayableObject: RepairableObject
             shake = shake * 2 - Vector2.one;
             shake *= ShakeStrength * strength;
             Debug.Log(shake);
-            BreakableObjects.ForEach(obj => obj.transform.position += (shake - offset).ToVector3() * Time.deltaTime);
+            GetComponentsInChildren<BreakablePart>().ForEach(obj => obj.transform.position += (shake - offset).ToVector3() * Time.deltaTime);
             offset = shake;
             yield return null;
         }
 
-        BreakableObjects.ForEach(obj => obj.DoBreak());
+        GetComponentsInChildren<BreakablePart>().ForEach(obj => obj.DoBreak());
         Destroy(gameObject);
     }
 
     public override void Repair(IEnumerable<PieceSet> pieces)
     {
         GetComponent<Rigidbody>().isKinematic = true;
-        GetComponentsInChildren<BreakablePart>()
-            .ForEach(part => 
-                part.RepairFrom(pieces.Where(p => 
-                    p.Type == part.PieceTypePrefab.GetComponent<PieceSet>().Type).First()
-                ));
+        var parts = GetComponentsInChildren<BreakablePart>();
+        foreach (var piece in pieces)
+        {
+            var part = parts.Where(p => p.PieceTypePrefab.GetComponent<PieceSet>().Type == piece.Type).Where(p => p.CurrentState != BreakablePart.State.Repairing).First();
+            part.RepairFrom(piece);
+        }
     }
 }

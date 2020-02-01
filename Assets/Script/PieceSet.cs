@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public enum PieceType
 {
@@ -25,6 +26,8 @@ public class PieceSet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        /*Pieces = Pieces.Where(p => p).ToList();
+        if (Pieces.Count <= 0)
+            Destroy(gameObject);*/
     }
 }

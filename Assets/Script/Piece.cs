@@ -44,6 +44,7 @@ public class Piece : MonoBehaviour
 
     IEnumerator BrowianMotion()
     {
+        GetComponent<SphereCollider>().enabled = false;
         GetComponent<Rigidbody>().isKinematic = true;
         var pos = transform.position;
         var r = UnityEngine.Random.value * 100000;
@@ -63,6 +64,8 @@ public class Piece : MonoBehaviour
 
     public void StartRepair()
     {
+        GetComponent<SphereCollider>().enabled = false;
+        GetComponent<Rigidbody>().isKinematic = true;
         float2 pos = new float2(TargetPosition.x, TargetPosition.y);
         pos -= 1 / 16;
         pos *= 8;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5861540922145695406}
   - component: {fileID: 4053758689127123078}
   m_Layer: 0
-  m_Name: Glass
+  m_Name: Water
   m_TagString: Pieces
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Pieces: []
+  Type: 0

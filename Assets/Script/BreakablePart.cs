@@ -3,16 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+
 [RequireComponent(typeof(SpriteRenderer))]
 public class BreakablePart : MonoBehaviour
 {
+    public enum State
+    {
+        None,
+        Repairing,
+        Breaking,
+    }
     public float Force = 1;
     public float Radius = 2;
     public GameObject PieceTypePrefab;
+    public State CurrentState = BreakablePart.State.None;
     private void OnEnable()
     {
     }
 
+    [EditorButton]
     public void DoBreak()
     {
         var renderer = GetComponent<SpriteRenderer>();
@@ -38,6 +47,7 @@ public class BreakablePart : MonoBehaviour
 
     public void RepairFrom(PieceSet pieces)
     {
+        CurrentState = State.Repairing;
         StartCoroutine(RepairInternal(pieces));
     }
 
@@ -76,7 +86,7 @@ public class BreakablePart : MonoBehaviour
 
         while(piecesMap.Count >0)
         {
-            var count = Mathf.CeilToInt(piecesMap.Count * Random.value * .8f);
+            var count = Mathf.CeilToInt(piecesMap.Count * Random.value * .9f);
             for (var i = 0; i < count; i++)
             {
                 var host = piecesMap.Keys.RandomTake(1).First();
