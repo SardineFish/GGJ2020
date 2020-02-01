@@ -17,6 +17,7 @@ public class BreakablePart : MonoBehaviour
     public float Radius = 2;
     public GameObject PieceTypePrefab;
     public State CurrentState = BreakablePart.State.None;
+    public GameObject PiecePrefab;
     private void OnEnable()
     {
     }
@@ -32,7 +33,7 @@ public class BreakablePart : MonoBehaviour
         {
             for (int x = (int)sprite.rect.x; x < sprite.rect.width; x++)
             {
-                var obj = Instantiate(GameSystem.Curernt.PiecePrefab);
+                var obj = Instantiate(PiecePrefab);
                 obj.transform.parent = wrapper.transform;
                 var peice = obj.GetComponent<Piece>();
                 peice.Color = sprite.texture.GetPixel(x, y);
@@ -68,7 +69,10 @@ public class BreakablePart : MonoBehaviour
                 var obj = Instantiate(GameSystem.Curernt.PiecePrefab);
                 obj.transform.parent = pieces.transform;
                 var piece = obj.GetComponent<Piece>();
+                if (!sprite || !sprite.texture)
+                    Debug.Log(renderer);
                 piece.Color = sprite.texture.GetPixel(x, y);
+
                 var pos = new Vector2(x, y);
                 piece.TargetPosition = transform.position + ((pos - sprite.pivot) / sprite.pixelsPerUnit).ToVector3();
                 piece.GetComponent<Rigidbody>().isKinematic = true;

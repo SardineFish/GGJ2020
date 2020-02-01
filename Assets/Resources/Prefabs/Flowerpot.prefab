@@ -114,6 +114,8 @@ MonoBehaviour:
   PieceTypePrefab: {fileID: 5496675998767852449, guid: 7c42dfc173833c7438238bf3cbb17b2f,
     type: 3}
   CurrentState: 0
+  PiecePrefab: {fileID: 1088031583937141543, guid: 22c1e198b3ad6544b8f008ce44910d80,
+    type: 3}
 --- !u!1 &6465491501870593831
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,6 +230,8 @@ MonoBehaviour:
   PieceTypePrefab: {fileID: 5496675998767852449, guid: 123feb57e9b8e96498990fe8f9816b0b,
     type: 3}
   CurrentState: 0
+  PiecePrefab: {fileID: 1088031583937141543, guid: 22c1e198b3ad6544b8f008ce44910d80,
+    type: 3}
 --- !u!1 &6465491502092602097
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,6 +346,8 @@ MonoBehaviour:
   PieceTypePrefab: {fileID: 5496675998767852449, guid: 7c42dfc173833c7438238bf3cbb17b2f,
     type: 3}
   CurrentState: 0
+  PiecePrefab: {fileID: 1088031583937141543, guid: 22c1e198b3ad6544b8f008ce44910d80,
+    type: 3}
 --- !u!1 &8498060324500061486
 GameObject:
   m_ObjectHideFlags: 0

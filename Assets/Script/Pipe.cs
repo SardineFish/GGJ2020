@@ -14,7 +14,9 @@ public class Pipe : RepairableObject
     GameObject waterCollection;
     public override void Repair(IEnumerable<PieceSet> pieces)
     {
-
+        pieces.Where(p=>p.Type == PieceType.Water).First().Pieces.Select(p => p.GetComponent<Water>())
+            .Where(water => water)
+            .ForEach(water => water.FlowBack(Spout.position));
     }
 
     // Use this for initialization
@@ -30,7 +32,7 @@ public class Pipe : RepairableObject
         {
             if (Input.GetKey(KeyCode.F))
             {
-                if (Random.value < .5f)
+                if (Random.value < 1f)
                 {
                     if(!waterCollection)
                     {

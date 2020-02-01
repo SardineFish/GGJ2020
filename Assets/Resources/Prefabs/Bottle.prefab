@@ -114,6 +114,9 @@ MonoBehaviour:
   Radius: 2
   PieceTypePrefab: {fileID: 5496675998767852449, guid: a2fcab06a0114aa46935c230b096dedd,
     type: 3}
+  CurrentState: 0
+  PiecePrefab: {fileID: 1088031583937141543, guid: 22c1e198b3ad6544b8f008ce44910d80,
+    type: 3}
 --- !u!61 &5506093892630348699
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -277,8 +280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ec5e972a4c413b4d8895698f4236d4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BreakableObjects:
-  - {fileID: 5506093892630348698}
   ShakeStrength: 10
   ShakeSpeed: 1000
   ShakeTime: 1

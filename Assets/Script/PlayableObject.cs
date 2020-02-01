@@ -51,8 +51,8 @@ public class PlayableObject: RepairableObject
         var parts = GetComponentsInChildren<BreakablePart>();
         foreach (var piece in pieces)
         {
-            var part = parts.Where(p => p.PieceTypePrefab.GetComponent<PieceSet>().Type == piece.Type).Where(p => p.CurrentState != BreakablePart.State.Repairing).First();
-            part.RepairFrom(piece);
+            var part = parts.Where(p => p.PieceTypePrefab.GetComponent<PieceSet>().Type == piece.Type).Where(p => p.CurrentState != BreakablePart.State.Repairing).FirstOrDefault();
+            part?.RepairFrom(piece);
         }
     }
 }
