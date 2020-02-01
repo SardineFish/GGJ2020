@@ -62,6 +62,14 @@ public class Piece : MonoBehaviour
         }
     }
 
+    public void StopBrowianMotion()
+    {
+        StopAllCoroutines();
+
+        GetComponent<SphereCollider>().enabled = true;
+        GetComponent<Rigidbody>().isKinematic = false;
+    }
+
     public void StartRepair()
     {
         GetComponent<SphereCollider>().enabled = false;
@@ -71,6 +79,7 @@ public class Piece : MonoBehaviour
         pos *= 8;
         pos = math.floor(pos);
         pos = pos / 8;
+        pos.y += .5f / 8;
         TargetPosition = new Vector3(pos.x, pos.y, TargetPosition.z);
         transform.localScale = Vector3.one;
         StartCoroutine(RepairInternal());

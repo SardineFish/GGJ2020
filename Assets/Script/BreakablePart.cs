@@ -33,10 +33,13 @@ public class BreakablePart : MonoBehaviour
         {
             for (int x = (int)sprite.rect.x; x < sprite.rect.width; x++)
             {
+                var color = sprite.texture.GetPixel(x, y);
+                if (color.a <= 0)
+                    continue;
                 var obj = Instantiate(PiecePrefab);
                 obj.transform.parent = wrapper.transform;
                 var peice = obj.GetComponent<Piece>();
-                peice.Color = sprite.texture.GetPixel(x, y);
+                peice.Color = color;
                 var pos = new Vector2(x, y);
                 peice.transform.position = transform.position + ((pos - sprite.pivot) / sprite.pixelsPerUnit).ToVector3();
                 peice.Explode(transform.position, Force, Radius);
@@ -66,13 +69,15 @@ public class BreakablePart : MonoBehaviour
         {
             for (int x = (int)sprite.rect.x; x < sprite.rect.width; x++)
             {
+                var color = sprite.texture.GetPixel(x, y);
+                if (color.a <= 0)
+                    continue;
                 var obj = Instantiate(GameSystem.Curernt.PiecePrefab);
                 obj.transform.parent = pieces.transform;
                 var piece = obj.GetComponent<Piece>();
                 if (!sprite || !sprite.texture)
                     Debug.Log(renderer);
-                piece.Color = sprite.texture.GetPixel(x, y);
-
+                piece.Color = color;
                 var pos = new Vector2(x, y);
                 piece.TargetPosition = transform.position + ((pos - sprite.pivot) / sprite.pixelsPerUnit).ToVector3();
                 piece.GetComponent<Rigidbody>().isKinematic = true;

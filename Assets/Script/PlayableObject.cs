@@ -53,6 +53,8 @@ public class PlayableObject: RepairableObject
         {
             var part = parts.Where(p => p.PieceTypePrefab.GetComponent<PieceSet>().Type == piece.Type).Where(p => p.CurrentState != BreakablePart.State.Repairing).FirstOrDefault();
             part?.RepairFrom(piece);
+            if (!part)
+                piece.Pieces.ForEach(p => p.StopBrowianMotion());
         }
     }
 }

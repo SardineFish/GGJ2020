@@ -43,7 +43,7 @@ public class GameSystem : MonoBehaviour
     }
     IEnumerator DoRepare()
     {
-        var pieces = GameObject.FindGameObjectsWithTag("Pieces").Select(obj => obj.GetComponent<PieceSet>()).Where(p =>
+        var pieces = GameObject.FindGameObjectsWithTag("Pieces").Where(obj=>obj).Select(obj => obj.GetComponent<PieceSet>()).Where(p =>
         {
             p.Pieces = p.Pieces.Where(t => t).ToList();
             return p.Pieces.Count > 0;
