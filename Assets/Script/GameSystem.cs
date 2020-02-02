@@ -18,6 +18,7 @@ public class GameSystem : MonoBehaviour
     public GameObject FlowerPod;
     public GameObject Box;
     public GameObject WaterCup;
+    public Seedling Seedling;
 
     public RepairableObject Pipe;
 
@@ -64,13 +65,24 @@ public class GameSystem : MonoBehaviour
         {
             var window = Instantiate(Window).GetComponent<RepairableObject>();
             window.Repair(pieces);
+            yield return new WaitForSeconds(5);
+            Seedling.HintSun.SetActive(false);
+            Seedling.HintDone.SetActive(true);
         }
         else if (pieces.Any(p => p.Type == PieceType.Pottery) && pieces.Any(p => p.Type == PieceType.Dirt))
         {
             Instantiate(FlowerPod).GetComponent<RepairableObject>().Repair(pieces);
+            yield return new WaitForSeconds(3);
+            Seedling.HintFlowerPot.SetActive(false);
+            Seedling.HintWater.SetActive(true);
         }
         else if (pieces.Any(p => p.Type == PieceType.Water) && pieces.Any(p => p.Type == PieceType.Glass))
+        {
             Instantiate(WaterCup).GetComponent<RepairableObject>().Repair(pieces);
+            yield return new WaitForSeconds(2f);
+            Seedling.HintWater.SetActive(false);
+            Seedling.HintSun.SetActive(true);
+        }
         else if (pieces.Any(p => p.Type == PieceType.Glass))
             Instantiate(Bottle).GetComponent<RepairableObject>().Repair(pieces);
         else if (pieces.Any(p => p.Type == PieceType.Wood))
